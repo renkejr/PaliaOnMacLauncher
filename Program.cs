@@ -1,9 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using PaliaOnMacLauncher;
+using System.Runtime.InteropServices;
 
 var commandArgs = Environment.GetCommandLineArgs().ToList();
-var installationPath = commandArgs.ElementAtOrDefault(1) ?? Path.Combine("C:", "Program Files", "Palia");
+var defaultDrive = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "drive_c" : "C";
+var installationPath = commandArgs.ElementAtOrDefault(1) ?? Path.Combine(defaultDrive, "Program Files", "Palia");
 var patchManifestUrl = commandArgs.ElementAtOrDefault(2) ?? "https://update.palia.com/manifest/PatchManifest.json";
 
 Console.WriteLine("Installation Path: {0}", installationPath);
